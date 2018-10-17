@@ -1,0 +1,18 @@
+<h1>Login</h1>
+
+<div>
+  <%= form_tag sessions_path do %>
+    <div>
+      <%= label_tag :email, "Email Address:" %>
+      <%= email_field_tag :email %>
+    </div>
+    <div>
+      <%= label_tag :password, "Password:" %>
+      <%= password_field_tag :password %>
+    </div>
+    <div>
+      <%= submit_tag "Login" %>
+    </div>
+  <% end %>
+  <%= link_to "Signup New User", new_user_path  %>
+</div>
