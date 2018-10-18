@@ -1,0 +1,10 @@
+<h1>Ninja Santa</h1>
+
+<% if @games.any? %>
+  <div>
+    <h2>Your Games</h2>
+    <%= render @games %>
+  </div>
+<% end %>
+
+<%= link_to('Start a new game', new_game_path) %>
