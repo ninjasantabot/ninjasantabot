@@ -1,22 +1,16 @@
 class CreateUserPairings
+  attr_reader :users
+
   def initialize(game, users)
     @game = game
     @users = users
   end
 
   def call
-    id_list = @users.pluck(:id).shuffle
-
     Pairing.transaction do
-      (0...randomised_list.count).each do |index|
-        Pairing.create!(
-          :game => @game,
-          :ninja_id => id_list[index],
-          :target_id => id_list[index-1]
-        )
+      users.shuffle.cycle.each_cons(2).take(users.size).each do |ninja, target|
+        @game.pairings.create!(ninja: ninja, target: target)
       end
     end
-
-    SendTargetEmails.new(@game).call
   end
 end
