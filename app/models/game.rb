@@ -13,7 +13,7 @@ class Game < ApplicationRecord
   validates_presence_of :signup_end_date
   validates_presence_of :game_start_date
   validates_presence_of :game_end_date
-  validates :dates_are_sequential
+  validate :dates_are_sequential
 
   def num_days
     (game.end_date - game.start_date).to_i

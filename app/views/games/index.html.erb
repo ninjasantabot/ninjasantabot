@@ -1,9 +1,9 @@
 <h1>Ninja Santa</h1>
 
-<% if @games.any? %>
+<% if @current_games.any? %>
   <div>
     <h2>Your Games</h2>
-    <%= render @games %>
+    <%= render @current_games %>
   </div>
 <% end %>
 
