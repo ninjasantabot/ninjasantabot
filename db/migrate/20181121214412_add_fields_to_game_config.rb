@@ -1,4 +1,4 @@
-class AddConfigFieldsToGame < ActiveRecord::Migration[5.2]
+class AddFieldsToGameConfig < ActiveRecord::Migration[5.2]
   def change
     change_table :games do |t|
       t.column :signup_end_date, :date
