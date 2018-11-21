@@ -2,26 +2,24 @@ class GamesController < ApplicationController
   before_action :find_current_user
 
   def index
-    @games = @current_user.games
+    @current_games = @current_user.games
+    @open_games = Game.in_signup
   end
 
   def new
-    @game = Game.new
+    @game = Game.new(game_params)
   end
 
   def create
     Game.transaction do
-      game = Game.create!(name: game_params.require(:name))
-      config = GameConfig.create!(
-        game: game,
-        num_days: game_params.require(:num_days),
-      )
-
-      CreateDaysForGame.new(config).call
+      game = Game.create!(game_params)
+      CreateDaysForGame.new(game).call
       UserGame.create!(user: @current_user, game: game, admin: true)
     end
 
     redirect_to(action: :index)
+  rescue ActiveRecord::RecordInvalid
+    redirect_to(action: new, params: params)
   end
 
   def show; end
@@ -29,7 +27,12 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game)
+    params.require(:game).permit(
+      :name,
+      :signup_end_date,
+      :game_start_date,
+      :game_end_date
+    )
   end
 
   def find_current_user

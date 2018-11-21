@@ -1,11 +1,10 @@
 class CreateDaysForGame
-  def initialize(config)
-    @config = config
-    @game = config.game
+  def initialize(game)
+    @game = game
   end
 
   def call
-    (0...@config.num_days).each do |index|
+    (0...@game.num_days).each do |index|
       Day.create!(:game => @game, :index => index)
     end
   end
