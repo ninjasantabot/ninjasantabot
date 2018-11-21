@@ -4,6 +4,7 @@ class Game < ApplicationRecord
   has_many :pairings
 
   has_many :days
+  has_many :clues, through: :days
 
   scope :in_signup, -> { where("signup_end_date > ?", Date.today) }
   scope :waiting_for_clues, -> { where("game_start_date > ?", Date.today) }

@@ -22,7 +22,10 @@ class GamesController < ApplicationController
     redirect_to(action: new, params: params)
   end
 
-  def show; end
+  def show
+    @game = Game.find(params[:id])
+    @current_clue, @previous_clues = @game.clues.where(target: @current_user).order(day_id: :asc)
+  end
 
   private
 

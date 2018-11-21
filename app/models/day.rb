@@ -1,5 +1,6 @@
 class Day < ApplicationRecord
   belongs_to :game
+  has_many :clues
 
   validates_uniqueness_of :index, :scope => :game_id
 
