@@ -5,7 +5,7 @@ class SantaBot
 
   def message_user(user:, message:, target: nil)
     client.chat_postMessage(
-      channel: channels[user],
+      channel: user,
       text: format_message(message, target),
       as_user: true
     )
@@ -21,13 +21,5 @@ class SantaBot
     else
       I18n.t(message)
     end.join("\n")
-  end
-
-  def channels
-    @channels ||= users.each_with_object({}) { |user, obj| obj[user.profile.email] = user.id }
-  end
-
-  def users
-    @users ||= client.users_list.members
   end
 end
