@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_21_214412) do
+ActiveRecord::Schema.define(version: 2018_11_22_021139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 2018_11_21_214412) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "signup_end_date"
-    t.date "game_start_date"
-    t.date "game_end_date"
+    t.date "signup_end_date", default: "2018-11-22", null: false
+    t.date "game_start_date", default: "2018-11-22", null: false
+    t.date "game_end_date", default: "2018-11-22", null: false
   end
 
   create_table "guesses", force: :cascade do |t|
