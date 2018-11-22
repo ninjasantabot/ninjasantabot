@@ -14,13 +14,12 @@ class GamesController < ApplicationController
     end_date = game_params[:game_start_date].to_date + game_params[:duration].to_i.days
     game = Game.new(game_params.except(:duration).merge(:game_end_date => end_date))
 
-    (0...game.num_days).each do |index|
-      Day.new(:game => game, :index => index)
-    end
-
-    UserGame.new(user: @current_user, game: game, admin: true)
-
     if game.save
+      (0...game.num_days).each do |index|
+        Day.create!(:game => game, :index => index)
+      end
+
+      UserGame.create!(user: @current_user, game: game, admin: true)
       redirect_to(action: :index)
     else
       @game = game
