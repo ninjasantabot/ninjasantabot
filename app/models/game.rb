@@ -7,6 +7,10 @@ class Game < ApplicationRecord
   has_many :clues, through: :days
   has_many :guesses, through: :days
 
+  has_many :visible_days, -> { visible_by(Date.today) }, class_name: 'Day'
+  has_many :visible_clues, -> { joins(day: :game) }, through: :visible_days, source: :clues
+  has_many :visible_guesses, -> { joins(day: :game) }, through: :visible_days, source: :guesses
+
   scope :in_signup, -> { where("signup_end_date > ?", Date.today) }
   scope :waiting_for_clues, -> { where("game_start_date > ?", Date.today) }
   scope :in_progress, -> { where("game_end_date > ?", Date.today) }
