@@ -17,8 +17,16 @@ class Game < ApplicationRecord
   validates_presence_of :game_end_date
   validate :dates_are_sequential
 
+  def remaining_ninjas
+    users.where(id: pairings.active.pluck(:ninja_id))
+  end
+
   def num_days
     (game_end_date - game_start_date).to_i
+  end
+
+  def current_day
+    days.find_by(index: current_day_index)
   end
 
   def visible_clues
