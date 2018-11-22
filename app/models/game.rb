@@ -18,14 +18,18 @@ class Game < ApplicationRecord
   validate :dates_are_sequential
 
   def num_days
-    (game.end_date - game.start_date).to_i
+    (game_end_date - game_start_date).to_i
   end
 
   private
 
   def dates_are_sequential
-    unless signup_end_date < game_start_date && game_start_date < game_end_date
-      errors.add(:base, "Cannot have overlapping/out of order game progress dates")
+    unless signup_end_date < game_start_date
+      errors.add(:base, "Signups must end before the game starts")
+    end
+
+    unless game_start_date < game_end_date
+      errors.add(:base, "The game must end after starting")
     end
   end
 end

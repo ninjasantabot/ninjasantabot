@@ -7,19 +7,25 @@ class GamesController < ApplicationController
   end
 
   def new
-    @game = Game.new(game_params)
+    @game = Game.new
   end
 
   def create
-    Game.transaction do
-      game = Game.create!(game_params)
-      CreateDaysForGame.new(game).call
-      UserGame.create!(user: @current_user, game: game, admin: true)
+    end_date = game_params[:game_start_date].to_date + game_params[:duration].to_i.days
+    game = Game.new(game_params.except(:duration).merge(:game_end_date => end_date))
+
+    (0...game.num_days).each do |index|
+      Day.new(:game => game, :index => index)
     end
 
-    redirect_to(action: :index)
-  rescue ActiveRecord::RecordInvalid
-    redirect_to(action: new, params: params)
+    UserGame.new(user: @current_user, game: game, admin: true)
+
+    if game.save
+      redirect_to(action: :index)
+    else
+      @game = game
+      render :new
+    end
   end
 
   def show
@@ -36,7 +42,7 @@ class GamesController < ApplicationController
       :name,
       :signup_end_date,
       :game_start_date,
-      :game_end_date
+      :duration
     )
   end
 

@@ -1,9 +1,17 @@
+<%= @game.errors.full_messages.join(", ") %>
+
 <%= form_with(model: @game, local: true) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
 
-  <%= f.label :num_days, 'Duration' %>
-  <%= f.text_field :num_days %>
+  <%= f.label :game_start_date, 'Game starts on:' %>
+  <%= f.date_field :game_start_date %>
+
+  <%= f.label :duration, 'Duration (days):' %>
+  <%= f.number_field :duration %>
+
+  <%= f.label :signup_end_date, 'Signups close on:' %>
+  <%= f.date_field :signup_end_date %>
 
   <%= f.submit %>
 <% end %>
