@@ -2,26 +2,32 @@ class GuessesController < ApplicationController
   before_action :find_day
 
   def new
-    @day = params.require(:day)
+    @guess = @day&.guesses.find_by(user: current_user)
   end
 
   def create
-    ninja = User.find_by(:name => params.require(:ninja_name))
-    correct = Pairing.where(:game => @day.game, :ninja => ninja, :target => current_user).exists?
+    ninja = User.find(ninja_id)
 
-    Guess.create!(
-      :user => current_user,
-      :ninja => ninja,
-      :day => @day,
-      :correct => correct
-    )
+    MakeGuess.new(
+      day: @day,
+      game: @game,
+      target: current_user,
+      ninja: ninja
+    ).call
 
-    redirect_to game_path(@day.game)
+    redirect_to @game
+  rescue => e
+    redirect_to new_game_guess_path(@game)
   end
 
   private
 
+  def ninja_id
+    params.require(:guess).require(:ninja_id)
+  end
+
   def find_day
-    @day = params.require(:day)
+    @game = current_user.games.find(params[:game_id])
+    @day = @game.current_day
   end
 end

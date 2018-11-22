@@ -9,7 +9,7 @@
   <p>Previous clues from your santa:</p>
   <ul>
     <% @previous_clues.each do |clue| %>
-      <td><%= clue.value %></td>
+      <li><%= clue.value %></li>
     <% end %>
   </ul>
 <% end %>
@@ -22,10 +22,20 @@
   <p>Clues you've sent:</p>
   <ul>
     <% @sent_clues.each do |sent_clue| %>
-      <td><%= sent_clue.value %></td>
+      <li><%= sent_clue.value %></li>
     <% end %>
   </ul>
 <% else %>
   <p>You haven't sent out any clues yet!</p>
   <p>Send a new clue</p>
 <% end %>
+
+<p>Guesses you've made:</p>
+
+<ul>
+  <% @guesses.each do |guess| %>
+    <li><%= guess.ninja.name %></li>
+  <% end %>
+</ul>
+
+<%= link_to "Make a guess", new_game_guess_path(@game) %>

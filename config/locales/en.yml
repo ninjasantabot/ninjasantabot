@@ -1,84 +1,74 @@
 en:
-  target_assignment:
-    - You’ve got NINJA MAIL.
-    - You have been assigned your TARGET.
-    - Your TARGET is %{target}.
-    - You can now start inputting your clues.
-    - Please have this done by Friday end of day.
-    - Happy Target Practice.
+  guesses:
+    today: You already guessed %{ninja} today
+    too_early: The game hasn't started yet!
 
-  reminder:
-    two_days:
-      - You’ve got NINJA MAIL.
-      - Santa would like to remind you that your clues are due in 2 days.
-      - You don’t want to ruin Christmas for %{target}, do you?
+  ninja_mail:
+    header: You’ve got NINJA MAIL.
+
+    target_assignment:
+      - You have been assigned your TARGET.
+      - Your TARGET is %{target}.
+      - You can now start inputting your clues.
+      - Please have this done by Friday end of day.
       - Happy Target Practice.
 
-    one_day:
-      - You’ve got NINJA MAIL.
-      - Santa would like to remind you, again, that your clues are due tomorrow.
-      - If you don’t submit your clues by tomorrow, you will have officially ruined Christmas for %{target} and are a total asshat.
+    reminder:
+      two_days:
+        - Santa would like to remind you that your clues are due in 2 days.
+        - You don’t want to ruin Christmas for %{target}, do you?
+        - Happy Target Practice.
 
-    half_day:
-      - You’ve got NINJA MAIL.
-      - Santa would like to send you a final reminder that your clues are due at 5pm today.
-      - Santa would also like to remind you that you agreed to the Ts&Cs to submit your clues in time. If you don’t submit your clues by 5pm, you will have officially ruined Christmas for %{target} and are a total asshat.
-      - And you still owe them a present.
-      - You are literally a piece of coal.
+      one_day:
+        - Santa would like to remind you, again, that your clues are due tomorrow.
+        - If you don’t submit your clues by tomorrow, you will have officially ruined Christmas for %{target} and are a total asshat.
 
-  notifications:
-    ninjas_and_targets:
-      day_one:
-        - You’ve got NINJA MAIL.
-        - Congratulations, Ninja. You have graduated in time for the annual target practice. The first clues will be delivered today at 12pm. You have one chance per day to guess who might be your Ninja. Keep an eye on the leaderboards for who is the best Ninja of the year … maybe it will be you.
+      half_day:
+        - Santa would like to send you a final reminder that your clues are due at 5pm today.
+        - Santa would also like to remind you that you agreed to the Ts&Cs to submit your clues in time. If you don’t submit your clues by 5pm, you will have officially ruined Christmas for %{target} and are a total asshat.
+        - And you still owe them a present.
+        - You are literally a piece of coal.
 
-      day_two:
-        - You’ve got NINJA MAIL.
-        - Congratulations, Ninja. You have made it to day 2. Make sure today’s clue is ready to go before 12pm today for your Target. Remember you only have one chance per day to guess who might be your Ninja. Keep an eye on the leaderboards for who is the best Ninja of the year … maybe it will be you.
+    notifications:
+      ninjas_and_targets:
+        day_one:
+          - Congratulations, Ninja. You have graduated in time for the annual target practice. The first clues will be delivered today at 12pm. You have one chance per day to guess who might be your Ninja. Keep an eye on the leaderboards for who is the best Ninja of the year … maybe it will be you.
 
-      day_three:
-        - You’ve got NINJA MAIL.
-        - Congratulations, Ninja. You have made it to day 3. Make sure today’s clue is ready to go before 12pm today for your Target. Remember you only have one chance per day to guess who might be your Ninja. Keep an eye on the leaderboards for who is the best Ninja of the year … maybe it will be you.
+        day_two:
+          - Congratulations, Ninja. You have made it to day 2. Make sure today’s clue is ready to go before 12pm today for your Target. Remember you only have one chance per day to guess who might be your Ninja. Keep an eye on the leaderboards for who is the best Ninja of the year … maybe it will be you.
 
-      day_four:
-        - You’ve got NINJA MAIL.
-        - Congratulations, Ninja. You have made it to day 4. Make sure today’s clue is ready to go before 12pm today for your Target. You may want to start making the clues easier if you think your Target really isn’t close. You may want to start some better detective work yourself if you want your present. Tomorrow is the final day.
+        day_three:
+          - Congratulations, Ninja. You have made it to day 3. Make sure today’s clue is ready to go before 12pm today for your Target. Remember you only have one chance per day to guess who might be your Ninja. Keep an eye on the leaderboards for who is the best Ninja of the year … maybe it will be you.
 
-      day_five:
-        - You’ve got NINJA MAIL.
-        - Congratulations, Ninja. You have made it to the finals. Kind of not the best you’re also in the finals as a Target though… Make sure today’s clue is ready to go before 12pm today for your Target. It would be ideal that your Target guesses you today so adjust your clue if you need to and have your present ready for them. Santa hopes your Target Practice was successful.
+        day_four:
+          - Congratulations, Ninja. You have made it to day 4. Make sure today’s clue is ready to go before 12pm today for your Target. You may want to start making the clues easier if you think your Target really isn’t close. You may want to start some better detective work yourself if you want your present. Tomorrow is the final day.
 
-    ninjas:
-      day_two:
-        - You’ve got NINJA MAIL.
-        - Congratulations, Ninja. You have made it to day 2 as a Ninja. Congratulations on your successful guess of your Ninja. Make sure today’s clue is ready to go before 12pm today for your Target.
+        day_five:
+          - Congratulations, Ninja. You have made it to the finals. Kind of not the best you’re also in the finals as a Target though… Make sure today’s clue is ready to go before 12pm today for your Target. It would be ideal that your Target guesses you today so adjust your clue if you need to and have your present ready for them. Santa hopes your Target Practice was successful.
 
-      day_three:
-        - You’ve got NINJA MAIL.
-        - Congratulations, Ninja. You have made it to day 2 as a Ninja. Congratulations on your successful guess of your Ninja. Make sure today’s clue is ready to go before 12pm today for your Target.
+      ninjas:
+        day_two:
+          - Congratulations, Ninja. You have made it to day 2 as a Ninja. Congratulations on your successful guess of your Ninja. Make sure today’s clue is ready to go before 12pm today for your Target.
 
-      day_four:
-        - You’ve got NINJA MAIL.
-        - Congratulations, Ninja. You have made it to day 4. Make sure today’s clue is ready to go before 12pm today for your Target. You may want to start making the clues easier if you think your Target really isn’t close. Tomorrow is the final day.
+        day_three:
+          - Congratulations, Ninja. You have made it to day 2 as a Ninja. Congratulations on your successful guess of your Ninja. Make sure today’s clue is ready to go before 12pm today for your Target.
 
-      day_five:
-        - You’ve got NINJA MAIL.
-        - Congratulations, Ninja. You have made it to the finals. Make sure today’s clue is ready to go before 12pm today for your Target. It would be ideal that your Target guesses you today so adjust your clue if you need to and have your present ready for them. Santa hopes your Target Practice was successful.
+        day_four:
+          - Congratulations, Ninja. You have made it to day 4. Make sure today’s clue is ready to go before 12pm today for your Target. You may want to start making the clues easier if you think your Target really isn’t close. Tomorrow is the final day.
+
+        day_five:
+          - Congratulations, Ninja. You have made it to the finals. Make sure today’s clue is ready to go before 12pm today for your Target. It would be ideal that your Target guesses you today so adjust your clue if you need to and have your present ready for them. Santa hopes your Target Practice was successful.
 
 
-    targets:
-      day_two:
-        - You’ve got NINJA MAIL.
-        - Congratulations, Target. You have made it to day 2 as a Target. You were guessed already as a Ninja … should your clues have been harder? Santa is disappointed. Your clue will be available at 12pm today. You have one guess today. Maybe you’ll be a better detective than a Ninja...
+      targets:
+        day_two:
+          - Congratulations, Target. You have made it to day 2 as a Target. You were guessed already as a Ninja … should your clues have been harder? Santa is disappointed. Your clue will be available at 12pm today. You have one guess today. Maybe you’ll be a better detective than a Ninja...
 
-      day_three:
-        - You’ve got NINJA MAIL.
-        - Congratulations, Target. You have made it to day 3 as a Target. You were guessed already as a Ninja … should your clues have been harder? Santa is disappointed. Your clue will be available at 12pm today. You have one guess today. Maybe you’ll be a better detective than a Ninja...
+        day_three:
+          - Congratulations, Target. You have made it to day 3 as a Target. You were guessed already as a Ninja … should your clues have been harder? Santa is disappointed. Your clue will be available at 12pm today. You have one guess today. Maybe you’ll be a better detective than a Ninja...
 
-      day_four:
-        - You’ve got NINJA MAIL.
-        - Congratulations…? You have made it to day 4 as a Target. You were guessed already as a Ninja … should your clues have been harder? Santa is disappointed. Your clue will be available at 12pm today. You have one guess today. Maybe you’ll be a better detective than a Ninja...
+        day_four:
+          - Congratulations…? You have made it to day 4 as a Target. You were guessed already as a Ninja … should your clues have been harder? Santa is disappointed. Your clue will be available at 12pm today. You have one guess today. Maybe you’ll be a better detective than a Ninja...
 
-      day_five:
-        - You’ve got NINJA MAIL.
-        - Wow. Congratulations…? You’re in the finals as a Target. Santa is disappointed. Your clue will be available at 12pm today. You have one final guess today. Step up your game.
+        day_five:
+          - Wow. Congratulations…? You’re in the finals as a Target. Santa is disappointed. Your clue will be available at 12pm today. You have one final guess today. Step up your game.

@@ -1,0 +1,12 @@
+<% if @day.present? %>
+  <% if @guess.present? %>
+    <%= I18n.t("guesses.today", ninja: @guess.ninja.name) %>
+  <% else %>
+    <%= form_for :guess, url: game_guesses_path(@game) do |f| %>
+      <%= f.collection_select(:ninja_id, @game.remaining_ninjas, :id, :name) %>
+      <%= f.submit %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= I18n.t("guesses.too_early") %>
+<% end %>

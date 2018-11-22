@@ -16,10 +16,17 @@ class SantaBot
   attr_reader :client
 
   def format_message(message, target)
+    [
+      I18n.t("ninja_mail.header"),
+      body(message, target)
+    ].join("\n")
+  end
+
+  def body(message, target)
     if target.present?
       I18n.t(message, target: target)
     else
       I18n.t(message)
-    end.join("\n")
+    end
   end
 end
