@@ -29,9 +29,9 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @current_clue, *@previous_clues = @game.visible_clues.where(target: current_user).order(day_id: :desc)
-    @guesses = @game.visible_guesses.where(user: current_user).order(day_id: :desc)
-    @sent_clues = @game.clues.where(user: current_user).order(day_id: :asc)
+    @current_clue, *@previous_clues = @game.visible_clues.where(target: current_user).recent_first
+    @guesses = @game.visible_guesses.where(user: current_user).recent_first
+    @sent_clues = @game.clues.where(user: current_user).oldest_first
   end
 
   private
