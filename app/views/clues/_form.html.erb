@@ -1,0 +1,9 @@
+<%= form_with(model: @clue, url: [@game, @clue], local: true) do |f| %>
+  <p>Your target: <%= @clue.target.name %></p>
+  <p>Clue will be sent on: <%= @clue.day.date %></p>
+
+  <%= f.label :value, 'Clue text:' %>
+  <%= f.text_field :value, value: @clue.value %>
+
+  <%= f.submit %>
+<% end %>

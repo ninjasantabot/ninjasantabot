@@ -22,7 +22,9 @@ ActiveRecord::Schema.define(version: 2018_11_22_100421) do
     t.string "value", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "game_id"
     t.index ["day_id"], name: "index_clues_on_day_id"
+    t.index ["game_id"], name: "index_clues_on_game_id"
     t.index ["target_id"], name: "index_clues_on_target_id"
     t.index ["user_id"], name: "index_clues_on_user_id"
   end
@@ -89,4 +91,5 @@ ActiveRecord::Schema.define(version: 2018_11_22_100421) do
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
+  add_foreign_key "clues", "games"
 end

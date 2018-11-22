@@ -1,5 +1,7 @@
 <h2>Welcome to <%= @game.name %>!</h2>
 
+<%= link_to('Back to my games', games_path) %>
+
 <% if @current_clue %>
   <p>Today's clue from your santa is:</p>
   <p><%= @current_clue.value %></p>
@@ -18,16 +20,32 @@
   <p>You haven't received any clues yet!</p>
 <% end %>
 
-<% if @sent_clues.any? %>
-  <p>Clues you've sent:</p>
+<% if @queued_clues.any? %>
+  <p>Queued clues:</p>
   <ul>
-    <% @sent_clues.each do |sent_clue| %>
-      <li><%= sent_clue.value %></li>
+    <% @queued_clues.each do |queued_clue| %>
+      <li>Clue: <%= queued_clue.value %> | Date: <%= queued_clue.day.date %> <%= link_to('Edit clue', edit_game_clue_path(@game, queued_clue)) %></li>
     <% end %>
   </ul>
+<% end %>
+
+<% if @sent_clues.any? %>
+  <p>Sent clues:</p>
+  <ul>
+    <% @sent_clues.each do |sent_clue| %>
+<<<<<<< HEAD
+      <li><%= sent_clue.value %></li>
+=======
+      <li>Clue: <%= sent_clue.value %> | Date: <%= sent_clue.day.date %></li>
+>>>>>>> Make it possible to queue clues as the santa
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @game.pairings.where(ninja: @current_user).any? && not_all_days_have_clues?(@game) %>
+  <p><%= link_to('Create a new clue', new_game_clue_path(@game)) %></p>
 <% else %>
-  <p>You haven't sent out any clues yet!</p>
-  <p>Send a new clue</p>
+  <p>You need to have a target before you can create clues</p>
 <% end %>
 
 <p>Guesses you've made:</p>

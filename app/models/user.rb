@@ -4,6 +4,11 @@ class User < ApplicationRecord
   has_many :user_games
   has_many :games, :through => :user_games
 
+  has_many :clues
+  has_many :received_clues, foreign_key: 'target_id', inverse_of: :target, class_name: 'Clue'
+
+  has_many :pairings
+
   validates_uniqueness_of :uid
 
   def self.new_with_session(params, session)

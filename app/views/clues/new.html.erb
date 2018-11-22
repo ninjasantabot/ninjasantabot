@@ -1,0 +1,5 @@
+<%= link_to('Back to game', game_path(@game)) %>
+
+<%= @clue.errors.full_messages.join(", ") %>
+
+<%= render partial: 'form' %>
