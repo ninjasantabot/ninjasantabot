@@ -10,16 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_22_021139) do
+ActiveRecord::Schema.define(version: 2018_11_22_023944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clues", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "target_id"
-    t.bigint "day_id"
-    t.string "value"
+    t.bigint "user_id", null: false
+    t.bigint "target_id", null: false
+    t.bigint "day_id", null: false
+    t.string "value", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["day_id"], name: "index_clues_on_day_id"
@@ -28,8 +28,8 @@ ActiveRecord::Schema.define(version: 2018_11_22_021139) do
   end
 
   create_table "days", force: :cascade do |t|
-    t.bigint "game_id"
-    t.integer "index"
+    t.bigint "game_id", null: false
+    t.integer "index", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id", "index"], name: "index_days_on_game_id_and_index", unique: true
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2018_11_22_021139) do
   end
 
   create_table "games", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "signup_end_date", default: "2018-11-22", null: false
@@ -46,10 +46,10 @@ ActiveRecord::Schema.define(version: 2018_11_22_021139) do
   end
 
   create_table "guesses", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "ninja_id"
-    t.bigint "day_id"
-    t.boolean "correct"
+    t.bigint "user_id", null: false
+    t.bigint "ninja_id", null: false
+    t.bigint "day_id", null: false
+    t.boolean "correct", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["day_id"], name: "index_guesses_on_day_id"
@@ -58,9 +58,9 @@ ActiveRecord::Schema.define(version: 2018_11_22_021139) do
   end
 
   create_table "pairings", force: :cascade do |t|
-    t.bigint "target_id"
-    t.bigint "ninja_id"
-    t.bigint "game_id"
+    t.bigint "target_id", null: false
+    t.bigint "ninja_id", null: false
+    t.bigint "game_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_pairings_on_game_id"
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 2018_11_22_021139) do
   end
 
   create_table "user_games", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "game_id"
+    t.bigint "user_id", null: false
+    t.bigint "game_id", null: false
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -79,9 +79,9 @@ ActiveRecord::Schema.define(version: 2018_11_22_021139) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password_digest"
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
