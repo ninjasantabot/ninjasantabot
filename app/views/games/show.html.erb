@@ -1,0 +1,31 @@
+<h2>Welcome to <%= @game.name %>!</h2>
+
+<% if @current_clue %>
+  <p>Today's clue from your santa is:</p>
+  <p><%= @current_clue.value %></p>
+<% end %>
+
+<% if @previous_clues.any? %>
+  <p>Previous clues from your santa:</p>
+  <ul>
+    <% @previous_clues.each do |clue| %>
+      <td><%= clue.value %></td>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if !@current_clue && @previous_clues.none? %>
+  <p>You haven't received any clues yet!</p>
+<% end %>
+
+<% if @sent_clues.any? %>
+  <p>Clues you've sent:</p>
+  <ul>
+    <% @sent_clues.each do |sent_clue| %>
+      <td><%= sent_clue.value %></td>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You haven't sent out any clues yet!</p>
+  <p>Send a new clue</p>
+<% end %>
