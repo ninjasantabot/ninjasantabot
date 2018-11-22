@@ -1,8 +1,8 @@
 class GamesController < ApplicationController
-  before_action :find_current_user
+  before_action :authenticate_user!, :except => [ :index ]
 
   def index
-    @current_games = @current_user.games
+    @current_games = current_user&.games
     @open_games = Game.in_signup
   end
 
@@ -19,7 +19,7 @@ class GamesController < ApplicationController
         Day.create!(:game => game, :index => index)
       end
 
-      UserGame.create!(user: @current_user, game: game, admin: true)
+      UserGame.create!(user: current_user, game: game, admin: true)
       redirect_to(action: :index)
     else
       @game = game
@@ -29,9 +29,9 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @current_clue, *@previous_clues = @game.clues.visible_by(Date.today).where(target: @current_user).order(day_id: :asc)
-    @guesses = @game.guesses.where(user: @current_user).order(day_id: :asc)
-    @sent_clues = @game.clues.where(user: @current_user).order(day_id: :asc)
+    @current_clue, *@previous_clues = @game.clues.visible_by(Date.today).where(target: current_user).order(day_id: :asc)
+    @guesses = @game.guesses.where(user: current_user).order(day_id: :asc)
+    @sent_clues = @game.clues.where(user: current_user).order(day_id: :asc)
   end
 
   private
@@ -43,9 +43,5 @@ class GamesController < ApplicationController
       :game_start_date,
       :duration
     )
-  end
-
-  def find_current_user
-    @current_user = User.find(session[:user_id])
   end
 end

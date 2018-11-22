@@ -7,9 +7,6 @@ Rails.application.routes.draw do
   end
 
   root "games#index"
-	delete '/logout' => 'sessions#destroy'
-
-  resources :users, :only => [:create, :new]
 
   resources :games, :only => [:index, :create, :new, :show]
 

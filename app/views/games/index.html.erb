@@ -1,10 +1,16 @@
 <h1>Ninja Santa</h1>
 
-<% if @current_games.any? %>
-  <div>
-    <h2>Your Games</h2>
-    <%= render @current_games %>
-  </div>
-<% end %>
+<% if current_user.present? %>
+  <% if @current_games.any? %>
+    <div>
+      <h2>Your Games</h2>
+      <%= render @current_games %>
+    </div>
+  <% end %>
 
-<%= link_to('Start a new game', new_game_path) %>
+  <%= link_to('Start a new game', new_game_path) %>
+<% else %>
+  <%= link_to user_slack_omniauth_authorize_path do %>
+    <img src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" />
+  <% end %>
+<% end %>
