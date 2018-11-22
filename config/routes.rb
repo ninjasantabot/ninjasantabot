@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  get '/', :to => redirect('/login')
-  get '/login' => 'sessions#new'
-	post '/login' => 'sessions#create'
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
+  devise_scope :user do
+    delete 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+  end
+
+  root "games#index"
 	delete '/logout' => 'sessions#destroy'
 
   resources :users, :only => [:create, :new]
-
-  resources :sessions, :only => [:create, :new]
 
   resources :games, :only => [:index, :create, :new, :show]
 
