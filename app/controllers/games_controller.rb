@@ -29,7 +29,7 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @current_clue, *@previous_clues = @game.clues.where(target: @current_user).order(day_id: :asc)
+    @current_clue, *@previous_clues = @game.clues.visible_by(Date.today).where(target: @current_user).order(day_id: :asc)
     @guesses = @game.guesses.where(user: @current_user).order(day_id: :asc)
     @sent_clues = @game.clues.where(user: @current_user).order(day_id: :asc)
   end
