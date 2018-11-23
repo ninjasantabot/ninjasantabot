@@ -1,6 +1,6 @@
-class SendScheduledComms
+class RunDailyTasks
   def call
-    puts "In SendScheduledComms"
+    puts "In RunDailyTasks"
     send_clue_reminders
   end
 
