@@ -33,11 +33,7 @@
   <p>Sent clues:</p>
   <ul>
     <% @sent_clues.each do |sent_clue| %>
-<<<<<<< HEAD
-      <li><%= sent_clue.value %></li>
-=======
       <li>Clue: <%= sent_clue.value %> | Date: <%= sent_clue.day.date %></li>
->>>>>>> Make it possible to queue clues as the santa
     <% end %>
   </ul>
 <% end %>
