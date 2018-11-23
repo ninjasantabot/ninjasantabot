@@ -8,7 +8,7 @@ class Game < ApplicationRecord
   has_many :guesses, through: :days
 
   scope :in_signup, -> { where("signup_end_date > ?", Date.today) }
-  scope :waiting_for_clues, -> { where("game_start_date > ?", Date.today) }
+  scope :waiting_for_clues, -> { where("game_start_date > ? and signup_end_date <= ?", Date.today, Date.today) }
   scope :in_progress, -> { where("game_end_date > ?", Date.today) }
   scope :completed, -> { where("game_end_date <= ?", Date.today) }
 
@@ -35,6 +35,10 @@ class Game < ApplicationRecord
 
   def visible_guesses
     guesses.joins(:day).where('days.index <= ?', current_day_index)
+  end
+
+  def days_until_start
+    (game_start_date - Date.today).to_i
   end
 
   private
