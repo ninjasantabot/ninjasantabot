@@ -10,7 +10,20 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class='container'>
+      <%= link_to(image_tag("ninja-santa-header"), root_path, {class: 'header'}) %>
+      <table border="3" width="100%" cellpadding="3">
+        <tbody>
+          <td><%= link_to('My games', games_path) %></td>
+          <td><%= link_to('Leaderboard', games_path) %></td>
+          <td><%= link_to('???', games_path) %></td>
+        </tbody>
+      </table>
+
+      <%= yield %>
+
+      <div id="santa"><%= image_tag("/assets/santa.png") %></div>
+    </div>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

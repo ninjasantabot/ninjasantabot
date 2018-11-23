@@ -1,5 +1,3 @@
-<h1>Ninja Santa</h1>
-
 <% if current_user.present? %>
   <% if @current_games.any? %>
     <div>
@@ -8,7 +6,7 @@
     </div>
   <% end %>
 
-  <%= link_to('Start a new game', new_game_path) %>
+  <p><%= image_tag("arrow-animated", height: '25', class: 'anchored') %> <%= link_to('Start a new game', new_game_path) %></p>
 <% else %>
   <%= link_to user_slack_omniauth_authorize_path do %>
     <img src="https://platform.slack-edge.com/img/sign_in_with_slack.png" srcset="https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x" />

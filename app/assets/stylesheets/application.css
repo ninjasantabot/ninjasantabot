@@ -13,3 +13,52 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background: url("/assets/snow-loop.gif");
+  background-size: 150px;
+}
+
+.container {
+  max-width: 60%;
+  margin: auto;
+}
+
+.header img {
+  width: 100%;
+}
+
+h2 {
+  color: blue;
+  text-align: center;
+  animation: blinker 1s linear infinite;
+  font-size: 40px;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.anchored {
+  vertical-align: bottom;
+}
+
+#santa {
+  position:absolute;
+  bottom: 0;
+  right: 0;
+}
+
+table {
+  border-top-width: 3px;
+  border-right-width: 3px;
+  border-bottom-width: 3px;
+  border-left-width: 3px;
+  width: 100%;
+  display: table;
+  border-collapse: separate;
+  border-spacing: 2px;
+  border-color: grey;
+}
