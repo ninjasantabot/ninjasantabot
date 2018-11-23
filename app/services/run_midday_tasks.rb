@@ -1,6 +1,6 @@
-class RunDailyTasks
+class RunMiddayTasks
   def call
-    puts "In RunDailyTasks"
+    puts "In RunMiddayTasks"
     send_clue_reminders
     start_games
   end

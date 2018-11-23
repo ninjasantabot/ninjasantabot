@@ -1,4 +1,4 @@
 desc "This task is called by the Heroku scheduler add-on"
-task :run_daily_tasks => :environment do
-  RunDailyTasks.new.call
+task :run_midday_tasks => :environment do
+  RunMiddayTasks.new.call
 end
