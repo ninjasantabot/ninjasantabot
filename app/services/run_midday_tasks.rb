@@ -24,9 +24,10 @@ class RunMiddayTasks
 
   def send_reminder_to_all_users(game, message)
     puts "sending #{message} for game #{game.id}"
-    game.users.each do |user|
-      if game.clues.where(user: user).count < game.num_days
-        bot.message_user(user: user.uid, message: message)
+    game.users.each do |ninja|
+      if game.clues.where(user: ninja).count < game.num_days
+        target = game.pairings.find_by(ninja: ninja).target
+        bot.message_user(user: ninja.uid, target: target.name, message: message)
       end
     end
   end
