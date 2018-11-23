@@ -2,6 +2,7 @@ class RunDailyTasks
   def call
     puts "In RunDailyTasks"
     send_clue_reminders
+    start_games
   end
 
   private
@@ -27,6 +28,12 @@ class RunDailyTasks
       if game.clues.where(user: user).count < game.num_days
         bot.message_user(user: user.uid, message: message)
       end
+    end
+  end
+
+  def start_games
+    games.where(signup_end_date: Date.today).each do |game|
+      CreateUserPairings.new(game).call
     end
   end
 end
