@@ -1,6 +1,6 @@
 <h2>Welcome to <i><%= @game.name %></i>!</h2>
 
-<%= image_tag("arrow-animated", height: '25', class: 'anchored') %> <%= link_to('Back to my games', games_path) %>
+<%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to('Back to my games', games_path) %>
 
 <% if @current_clue %>
   <p>Today's clue from your santa is:</p>
@@ -39,7 +39,7 @@
 <% end %>
 
 <% if @game.pairings.where(ninja: @current_user).any? && not_all_days_have_clues?(@game) %>
-  <p><%= image_tag("arrow-animated", height: '25', class: 'anchored') %> <%= link_to('Create a new clue', new_game_clue_path(@game)) %></p>
+  <p><%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to('Create a new clue', new_game_clue_path(@game)) %></p>
 <% else %>
   <p>You need to have a target before you can create clues</p>
 <% end %>
@@ -54,5 +54,5 @@
     <% end %>
   </ul>
 
-  <%= image_tag("arrow-animated", height: '25', class: 'anchored') %> <%= link_to "Make a guess", new_game_guess_path(@game) %>
+  <%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to "Make a guess", new_game_guess_path(@game) %>
 <% end %>
