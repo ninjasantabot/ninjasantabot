@@ -1,7 +1,7 @@
 class SendClueReminders
   def call
     puts "in SendClueReminders"
-    game_groupings = Game.waiting_for_clues.group(&:days_until_start)
+    game_groupings = Game.waiting_for_clues.group_by(&:days_until_start)
 
     game_groupings[3].each do |game|
       send_reminder_to_all_users(game, "ninja_mail.reminder.two_days")
