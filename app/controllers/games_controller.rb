@@ -38,6 +38,7 @@ class GamesController < ApplicationController
   def join
     @game = Game.find(params[:id])
     @game.user_games.create!(user: current_user)
+    redirect_to @game
   end
 
   private
