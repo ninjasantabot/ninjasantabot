@@ -3,7 +3,7 @@ class GamesController < ApplicationController
 
   def index
     @current_games = Array(current_user&.games)
-    @available_games = @current_games - Game.in_signup
+    @available_games = Game.in_signup - @current_games
   end
 
   def new
