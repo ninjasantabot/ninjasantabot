@@ -9,7 +9,7 @@ class SendDailyNotificationsForActiveGames
 
   def call
     puts "in SendDailyNotificationsForActiveGames"
-    game.in_progress.each do |game|
+    Game.in_progress.each do |game|
       puts "sending notifications for game #{game.id}"
       day_index = game.current_day_index
       partitions = partition_users(game)
