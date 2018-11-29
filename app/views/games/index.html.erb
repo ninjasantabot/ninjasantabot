@@ -8,7 +8,9 @@
 
   <% if @available_games.any? %>
     <% @available_games.each do |game| %>
-      <%= link_to join_game_path(game), "Join #{game.name}", method: :post %>
+      <div>
+        <%= link_to "Join #{game.name}", join_game_path(game), method: :post %>
+      </div>
     <% end %>
   <% end %>
 
