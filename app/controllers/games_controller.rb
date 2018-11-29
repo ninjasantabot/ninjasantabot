@@ -11,6 +11,11 @@ class GamesController < ApplicationController
   end
 
   def create
+    unless current_user.creator
+      render status: :forbidden
+      return
+    end
+
     end_date = game_params[:game_start_date].to_date + game_params[:duration].to_i.days
     game = Game.new(game_params.except(:duration).merge(:game_end_date => end_date))
 
