@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   root "games#index"
 
   resources :games, :only => [:index, :create, :new, :show] do
+    member do
+      post :join
+    end
     resources :clues, :only => [:new, :create, :edit, :update]
     resources :guesses, :only => [:new, :create]
   end

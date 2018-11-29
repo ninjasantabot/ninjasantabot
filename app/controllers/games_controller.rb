@@ -2,8 +2,8 @@ class GamesController < ApplicationController
   before_action :authenticate_user!, :except => [ :index ]
 
   def index
-    @current_games = current_user&.games
-    @open_games = Game.in_signup
+    @current_games = Array(current_user&.games)
+    @available_games = @current_games - Game.in_signup
   end
 
   def new
@@ -33,6 +33,11 @@ class GamesController < ApplicationController
     @guesses = @game.guesses.where(user: current_user).recent_first
     @queued_clues = @game.clues.where(user: current_user).order(day_id: :asc).select {|clue| clue.day.date > Date.today}
     @sent_clues = @game.clues.where(user: current_user).order(day_id: :asc).select {|clue| clue.day.date <= Date.today}
+  end
+
+  def join
+    @game = Game.find(params[:id])
+    @game.user_games.create!(user: current_user)
   end
 
   private

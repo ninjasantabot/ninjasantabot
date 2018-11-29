@@ -6,6 +6,12 @@
     </div>
   <% end %>
 
+  <% if @available_games.any? %>
+    <% @available_games.each do |game| %>
+      <%= link_to join_game_path(game), "Join #{game.name}", method: :post %>
+    <% end %>
+  <% end %>
+
   <p><%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to('Start a new game', new_game_path) %></p>
 <% else %>
   <%= link_to user_slack_omniauth_authorize_path do %>
