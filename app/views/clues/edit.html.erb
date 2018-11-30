@@ -1,6 +1,6 @@
 <%= link_to('Back to game', game_path(@game)) %>
 
-<% if @clue.day.date <= Date.today %>
+<% if @clue.day.date <= WorkaroundTime.today %>
   <p>This clue has already been delivered to your target. You can no longer edit it.</p>
 <% else %>
   <%= render partial: 'form' %>

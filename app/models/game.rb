@@ -7,10 +7,10 @@ class Game < ApplicationRecord
   has_many :clues, through: :days
   has_many :guesses, through: :days
 
-  scope :in_signup, -> { where("signup_end_date > ?", Date.today) }
-  scope :waiting_for_clues, -> { where("game_start_date > ? and signup_end_date <= ?", Date.today, Date.today) }
-  scope :in_progress, -> { where("game_end_date > ?", Date.today) }
-  scope :completed, -> { where("game_end_date <= ?", Date.today) }
+  scope :in_signup, -> { where("signup_end_date > ?", WorkaroundTime.today) }
+  scope :waiting_for_clues, -> { where("game_start_date > ? and signup_end_date <= ?", WorkaroundTime.today, WorkaroundTime.today) }
+  scope :in_progress, -> { where("game_end_date > ?", WorkaroundTime.today) }
+  scope :completed, -> { where("game_end_date <= ?", WorkaroundTime.today) }
 
   validates_presence_of :signup_end_date
   validates_presence_of :game_start_date
@@ -38,13 +38,13 @@ class Game < ApplicationRecord
   end
 
   def days_until_start
-    (game_start_date - Date.today).to_i
+    (game_start_date - WorkaroundTime.today).to_i
   end
 
   private
 
   def current_day_index
-    [Date.today - game_start_date, num_days].min.to_i
+    [WorkaroundTime.today - game_start_date, num_days].min.to_i
   end
 
   def dates_are_sequential

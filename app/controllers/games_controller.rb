@@ -32,8 +32,8 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @current_clue, *@previous_clues = @game.clues.where(target: current_user).order(day_id: :asc)
     @guesses = @game.guesses.where(user: current_user).recent_first
-    @queued_clues = @game.clues.where(user: current_user).order(day_id: :asc).select {|clue| clue.day.date > Date.today}
-    @sent_clues = @game.clues.where(user: current_user).order(day_id: :asc).select {|clue| clue.day.date <= Date.today}
+    @queued_clues = @game.clues.where(user: current_user).order(day_id: :asc).select {|clue| clue.day.date > WorkaroundTime.today}
+    @sent_clues = @game.clues.where(user: current_user).order(day_id: :asc).select {|clue| clue.day.date <= WorkaroundTime.today}
   end
 
   def join
