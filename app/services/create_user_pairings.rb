@@ -6,6 +6,8 @@ class CreateUserPairings
   end
 
   def call
+    return if game.pairings.exists?
+
     Pairing.transaction do
       users.shuffle.cycle.each_cons(2).take(users.size).each do |ninja, target|
         game.pairings.create!(ninja: ninja, target: target)
