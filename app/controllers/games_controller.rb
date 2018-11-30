@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!, :except => [ :index ]
+  before_action :require_creator, only: %i(new create)
 
   def index
     @current_games = Array(current_user&.games)
@@ -11,11 +12,6 @@ class GamesController < ApplicationController
   end
 
   def create
-    unless current_user.creator
-      render file: "#{Rails.root}/public/403.html", status: :forbidden
-      return
-    end
-
     end_date = game_params[:game_start_date].to_date + game_params[:duration].to_i.days
     game = Game.new(game_params.except(:duration).merge(:game_end_date => end_date))
 
