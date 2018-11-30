@@ -7,6 +7,10 @@ class SendDailyNotificationsForActiveGames
       4 => 'day_five',
     }.freeze
 
+  def initialize(bot)
+    @bot = bot
+  end
+
   def call
     puts "in SendDailyNotificationsForActiveGames"
     Game.in_progress.each do |game|
@@ -32,6 +36,10 @@ class SendDailyNotificationsForActiveGames
       end
     end
   end
+
+  private
+
+  attr_reader :bot
 
   def partition_users(game)
     surviving_ninjas = game.pairings.active.map(&:ninja)
