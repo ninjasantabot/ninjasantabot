@@ -1,8 +1,8 @@
 class CreateUserPairings
-  def initialize(game)
+  def initialize(game, bot)
     @game = game
     @users = game.users
-    @bot = SantaBot.new
+    @bot = bot
   end
 
   def call

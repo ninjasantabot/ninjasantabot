@@ -1,6 +1,9 @@
 class RunMiddayTasks
   def call
     puts "In RunMiddayTasks"
+
+    @bot = SantaBot.new
+
     send_clue_reminders
     start_games
   end
@@ -8,13 +11,13 @@ class RunMiddayTasks
   private
 
   def send_clue_reminders
-    SendClueReminders.new.call
+    SendClueReminders.new(@bot).call
   end
 
   def start_games
     Game.where(signup_end_date: WorkaroundTime.today).each do |game|
       puts "creating pairing for game #{game.id}"
-      CreateUserPairings.new(game).call
+      CreateUserPairings.new(game, @bot).call
     end
   end
 end

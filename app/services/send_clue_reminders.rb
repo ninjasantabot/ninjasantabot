@@ -1,4 +1,8 @@
 class SendClueReminders
+  def initialize(bot)
+    @bot = bot
+  end
+
   def call
     puts "in SendClueReminders"
     game_groupings = Game.waiting_for_clues.group_by(&:days_until_start)
@@ -26,4 +30,8 @@ class SendClueReminders
       end
     end
   end
+
+  private
+
+  attr_reader :bot
 end
