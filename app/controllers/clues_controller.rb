@@ -4,14 +4,14 @@ class CluesController < ApplicationController
   def new
     @clue = Clue.new(
       :target => target,
-      :day => next_clue_day
+      :day => next_clue_day(current_user)
     )
   end
 
   def create
     clue = current_user.clues.new(
       :target => target,
-      :day => next_clue_day,
+      :day => next_clue_day(current_user),
       :value => params[:clue][:value],
       :game => @game
     )
@@ -48,8 +48,9 @@ class CluesController < ApplicationController
     User.find(@game.pairings.where(ninja: current_user).first.target_id)
   end
 
-  def next_clue_day
-    @game.days.order("days.created_at DESC").includes(:clues).where(clues: { id: nil } ).last
+  def next_clue_day(user)
+    clued_days = @game.days.joins(:clues).where(clues: { user_id: user.id })
+    (@game.days - clued_days).min_by(&:index)
   end
 
   def find_game
