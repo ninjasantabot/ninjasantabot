@@ -12,7 +12,7 @@ class GamesController < ApplicationController
 
   def create
     unless current_user.creator
-      render status: :forbidden
+      render file: "#{Rails.root}/public/403.html", status: :forbidden
       return
     end
 
