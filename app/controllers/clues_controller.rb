@@ -1,5 +1,5 @@
 class CluesController < ApplicationController
-  before_action :find_current_user, :find_game
+  before_action :authenticate_user!, :find_game
 
   def new
     @clue = Clue.new(
@@ -9,7 +9,7 @@ class CluesController < ApplicationController
   end
 
   def create
-    clue = @current_user.clues.new(
+    clue = current_user.clues.new(
       :target => target,
       :day => next_clue_day,
       :value => params[:clue][:value],
@@ -45,7 +45,7 @@ class CluesController < ApplicationController
   end
 
   def target
-    User.find(@game.pairings.where(ninja: @current_user).first.target_id)
+    User.find(@game.pairings.where(ninja: current_user).first.target_id)
   end
 
   def next_clue_day
@@ -54,9 +54,5 @@ class CluesController < ApplicationController
 
   def find_game
     @game = Game.find(params[:game_id])
-  end
-
-  def find_current_user
-    @current_user = User.find(session[:user_id])
   end
 end
