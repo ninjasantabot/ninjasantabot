@@ -38,7 +38,7 @@
   </ul>
 <% end %>
 
-<% if @game.pairings.where(ninja: @current_user).any? && not_all_days_have_clues?(@game) %>
+<% if @game.pairing_for(current_user) && not_all_days_have_clues?(@game) %>
   <p><%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to('Create a new clue', new_game_clue_path(@game)) %></p>
 <% else %>
   <p>You need to have a target before you can create clues</p>
@@ -54,5 +54,8 @@
     <% end %>
   </ul>
 
+<% end %>
+
+<% if @game.accepting_guesses_for?(current_user) %>
   <%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to "Make a guess", new_game_guess_path(@game) %>
 <% end %>
