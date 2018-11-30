@@ -12,6 +12,8 @@ class SendDailyNotificationsForActiveGames
     Game.in_progress.each do |game|
       puts "sending notifications for game #{game.id}"
       day_index = game.current_day_index
+      next unless notification_for_day?(day_index)
+
       partitions = partition_users(game)
 
       partitions[:ninjas].each do |user|
@@ -50,5 +52,9 @@ class SendDailyNotificationsForActiveGames
     day_text = DAY_TEXTS[day_index]
 
     "ninja_mail.notifications.#{type}.#{day_text}"
+  end
+
+  def notification_for_day?(day_index)
+    DAY_TEXTS.has_key?(day_index)
   end
 end
