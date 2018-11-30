@@ -4,4 +4,8 @@ class Pairing < ApplicationRecord
   belongs_to :target, :class_name => "User"
 
   scope :active, -> { where(guessed: false) }
+
+  def active?
+    !guessed
+  end
 end

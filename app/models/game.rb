@@ -9,7 +9,7 @@ class Game < ApplicationRecord
 
   scope :in_signup, -> { where("signup_end_date > ?", WorkaroundTime.today) }
   scope :waiting_for_clues, -> { where("game_start_date > ? and signup_end_date <= ?", WorkaroundTime.today, WorkaroundTime.today) }
-  scope :in_progress, -> { where("game_end_date > ?", WorkaroundTime.today) }
+  scope :in_progress, -> { where("game_start_date <= ? AND game_end_date > ?", WorkaroundTime.today, WorkaroundTime.today) }
   scope :completed, -> { where("game_end_date <= ?", WorkaroundTime.today) }
 
   validates_presence_of :signup_end_date
@@ -39,6 +39,19 @@ class Game < ApplicationRecord
 
   def days_until_start
     (game_start_date - WorkaroundTime.today).to_i
+  end
+
+  def accepting_guesses_for?(user)
+    in_progress? && pairing_for(user).active? && game.current_day.guesses.where(user: user).empty?
+  end
+
+  def pairing_for(ninja)
+    pairings.select { |p| p.ninja == ninja }.first
+  end
+
+  def in_progress?
+    today = WorkaroundTime.today
+    game_start_date <= today && game_end_date > today
   end
 
   private
