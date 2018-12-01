@@ -54,6 +54,14 @@ class Game < ApplicationRecord
     game_start_date <= today && game_end_date > today
   end
 
+  def clues_for(target)
+    @clues_for ||= clues.preload(:day).where(target: target).oldest_first
+  end
+
+  def clues_from(ninja)
+    @clues_from ||= clues.preload(:day).where(user: ninja).oldest_first
+  end
+
   private
 
   def current_day_index

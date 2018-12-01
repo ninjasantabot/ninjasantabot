@@ -6,4 +6,8 @@ class Clue < ApplicationRecord
 
   scope :recent_first, -> { joins(:day).merge(Day.order(index: :desc)) }
   scope :oldest_first, -> { joins(:day).merge(Day.order(index: :asc)) }
+
+  def visible?
+    day.date <= WorkaroundTime.today
+  end
 end
