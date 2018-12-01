@@ -15,10 +15,10 @@ class CluesController < ApplicationController
 
   def create
     clue = current_user.clues.new(
-      :target => target,
-      :day => next_clue_day(current_user),
-      :value => params[:clue][:value],
-      :game => @game
+      target: target,
+      day: next_clue_day(current_user),
+      value: params[:clue][:value],
+      game: @game
     )
 
     if clue.save
@@ -50,7 +50,7 @@ class CluesController < ApplicationController
   end
 
   def target
-    User.find(@game.pairings.where(ninja: current_user).first.target_id)
+    @game.pairing_for(current_user).target
   end
 
   def next_clue_day(user)
