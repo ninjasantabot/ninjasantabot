@@ -2,10 +2,15 @@ class CluesController < ApplicationController
   before_action :authenticate_user!, :find_game
 
   def new
-    @clue = Clue.new(
-      :target => target,
-      :day => next_clue_day(current_user)
-    )
+    day = next_clue_day(current_user)
+    if day
+      @clue = Clue.new(
+        target: target,
+        day: day
+      )
+    else
+      redirect_to @game
+    end
   end
 
   def create
