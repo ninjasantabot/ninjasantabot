@@ -34,7 +34,7 @@ class Game < ApplicationRecord
   end
 
   def accepting_guesses_for?(user)
-    in_progress? && pairing_for(user).active? && game.current_day.guesses.where(user: user).empty?
+    in_progress? && pairing_for(user).active? && current_day.guesses.where(user: user).empty?
   end
 
   def pairing_for(ninja)
