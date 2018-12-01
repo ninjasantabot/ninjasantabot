@@ -2,37 +2,37 @@
 
 <%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to('Back to my games', games_path) %>
 
-<% if @current_clue %>
+<% if @clues.current %>
   <p>Today's clue from your santa is:</p>
-  <p><%= @current_clue.value %></p>
+  <p><%= @clues.current.value %></p>
 <% end %>
 
-<% if @previous_clues.any? %>
+<% if @clues.previous.any? %>
   <p>Previous clues from your santa:</p>
   <ul>
-    <% @previous_clues.each do |clue| %>
+    <% @clues.previous.each do |clue| %>
       <li><%= clue.value %></li>
     <% end %>
   </ul>
 <% end %>
 
-<% if !@current_clue && @previous_clues.none? %>
+<% if !@clues.current && @clues.previous.none? %>
   <p>You haven't received any clues yet!</p>
 <% end %>
 
-<% if @queued_clues.any? %>
+<% if @clues.queued.any? %>
   <p>Queued clues:</p>
   <ul>
-    <% @queued_clues.each do |queued_clue| %>
+    <% @clues.queued.each do |queued_clue| %>
       <li>Clue: <%= queued_clue.value %> | Date: <%= queued_clue.day.date %> <%= link_to('Edit clue', edit_game_clue_path(@game, queued_clue)) %></li>
     <% end %>
   </ul>
 <% end %>
 
-<% if @sent_clues.any? %>
+<% if @clues.sent.any? %>
   <p>Sent clues:</p>
   <ul>
-    <% @sent_clues.each do |sent_clue| %>
+    <% @clues.sent.each do |sent_clue| %>
       <li>Clue: <%= sent_clue.value %> | Date: <%= sent_clue.day.date %></li>
     <% end %>
   </ul>

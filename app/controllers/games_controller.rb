@@ -30,11 +30,9 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    @clues = ObservableClues.new(@game, current_user)
 
-    @current_clue, *@previous_clues = @game.clues_for(current_user).select(&:visible?)
     @guesses = @game.guesses.where(user: current_user).recent_first
-    @queued_clues = @game.clues_from(current_user).reject(&:visible?)
-    @sent_clues = @game.clues_from(current_user).select(&:visible?)
   end
 
   def join

@@ -29,14 +29,6 @@ class Game < ApplicationRecord
     days.find_by(index: current_day_index)
   end
 
-  def visible_clues
-    clues.joins(:day).where('days.index <= ?', current_day_index)
-  end
-
-  def visible_guesses
-    guesses.joins(:day).where('days.index <= ?', current_day_index)
-  end
-
   def days_until_start
     (game_start_date - WorkaroundTime.today).to_i
   end
@@ -52,14 +44,6 @@ class Game < ApplicationRecord
   def in_progress?
     today = WorkaroundTime.today
     game_start_date <= today && game_end_date > today
-  end
-
-  def clues_for(target)
-    @clues_for ||= clues.preload(:day).where(target: target).oldest_first
-  end
-
-  def clues_from(ninja)
-    @clues_from ||= clues.preload(:day).where(user: ninja).oldest_first
   end
 
   private
