@@ -12,15 +12,9 @@ class GamesController < ApplicationController
   end
 
   def create
-    end_date = game_params[:game_start_date].to_date + game_params[:duration].to_i.days
-    game = Game.new(game_params.except(:duration).merge(game_end_date: end_date))
+    game = build_game(current_user, game_params)
 
     if game.save
-      (0...game.num_days).each do |index|
-        Day.create!(game: game, index: index)
-      end
-
-      UserGame.create!(user: current_user, game: game, admin: true)
       redirect_to(action: :index)
     else
       @game = game
@@ -43,12 +37,24 @@ class GamesController < ApplicationController
 
   private
 
+  def build_game(creator, params)
+    Game.new(params) do |game|
+      (0...game.num_days).each do |index|
+        game.days.new(index: index)
+      end
+      game.user_games.new(user: creator, admin: true)
+    end
+  end
+
   def game_params
-    params.require(:game).permit(
+    filtered = params.require(:game).permit(
       :name,
       :signup_end_date,
       :game_start_date,
       :duration
     )
+
+    end_date = filtered[:game_start_date].to_date + filtered[:duration].to_i.days
+    filtered.except(:duration).merge(game_end_date: end_date)
   end
 end
