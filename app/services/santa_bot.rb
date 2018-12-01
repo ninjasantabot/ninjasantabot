@@ -17,7 +17,7 @@ class SantaBot
 
   def format_message(message, target)
     [
-      I18n.t("ninja_mail.header"),
+      I18n.t('ninja_mail.header'),
       body(message, target)
     ].join("\n")
   end

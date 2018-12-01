@@ -7,10 +7,10 @@ class Game < ApplicationRecord
   has_many :clues, through: :days
   has_many :guesses, through: :days
 
-  scope :in_signup, -> { where("signup_end_date > ?", WorkaroundTime.today) }
-  scope :waiting_for_clues, -> { where("game_start_date > ? and signup_end_date <= ?", WorkaroundTime.today, WorkaroundTime.today) }
-  scope :in_progress, -> { where("game_start_date <= ? AND game_end_date > ?", WorkaroundTime.today, WorkaroundTime.today) }
-  scope :completed, -> { where("game_end_date <= ?", WorkaroundTime.today) }
+  scope :in_signup, -> { where('signup_end_date > ?', WorkaroundTime.today) }
+  scope :waiting_for_clues, -> { where('game_start_date > ? and signup_end_date <= ?', WorkaroundTime.today, WorkaroundTime.today) }
+  scope :in_progress, -> { where('game_start_date <= ? AND game_end_date > ?', WorkaroundTime.today, WorkaroundTime.today) }
+  scope :completed, -> { where('game_end_date <= ?', WorkaroundTime.today) }
 
   validates_presence_of :signup_end_date
   validates_presence_of :game_start_date
@@ -54,11 +54,11 @@ class Game < ApplicationRecord
 
   def dates_are_sequential
     unless signup_end_date < game_start_date
-      errors.add(:base, "Signups must end before the game starts")
+      errors.add(:base, 'Signups must end before the game starts')
     end
 
     unless game_start_date < game_end_date
-      errors.add(:base, "The game must end after starting")
+      errors.add(:base, 'The game must end after starting')
     end
   end
 end

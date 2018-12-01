@@ -1,6 +1,6 @@
 class RunMorningTasks
   def call
-    puts "In RunMorningTasks"
+    puts 'In RunMorningTasks'
 
     @bot = SantaBot.new
 

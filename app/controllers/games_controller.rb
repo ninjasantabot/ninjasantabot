@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :authenticate_user!, :except => [ :index ]
+  before_action :authenticate_user!, except: [ :index ]
   before_action :require_creator, only: %i(new create)
 
   def index
@@ -13,11 +13,11 @@ class GamesController < ApplicationController
 
   def create
     end_date = game_params[:game_start_date].to_date + game_params[:duration].to_i.days
-    game = Game.new(game_params.except(:duration).merge(:game_end_date => end_date))
+    game = Game.new(game_params.except(:duration).merge(game_end_date: end_date))
 
     if game.save
       (0...game.num_days).each do |index|
-        Day.create!(:game => game, :index => index)
+        Day.create!(game: game, index: index)
       end
 
       UserGame.create!(user: current_user, game: game, admin: true)

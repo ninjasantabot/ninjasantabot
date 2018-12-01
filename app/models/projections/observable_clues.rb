@@ -21,7 +21,8 @@ class ObservableClues
 
     current, *previous = clues_for(user).select(&:visible?)
     sent, queued = clues_from(user).partition(&:visible?)
-    @data ||= {
+
+    @data = {
       current:  current,
       previous: previous,
       sent:     sent,

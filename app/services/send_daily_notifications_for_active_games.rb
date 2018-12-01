@@ -1,18 +1,18 @@
 class SendDailyNotificationsForActiveGames
   DAY_TEXTS = {
-      0 => 'day_one',
-      1 => 'day_two',
-      2 => 'day_three',
-      3 => 'day_four',
-      4 => 'day_five',
-    }.freeze
+    0 => 'day_one',
+    1 => 'day_two',
+    2 => 'day_three',
+    3 => 'day_four',
+    4 => 'day_five',
+  }.freeze
 
   def initialize(bot)
     @bot = bot
   end
 
   def call
-    puts "in SendDailyNotificationsForActiveGames"
+    puts 'in SendDailyNotificationsForActiveGames'
     Game.in_progress.each do |game|
       puts "sending notifications for game #{game.id}"
       day_index = game.current_day_index
@@ -21,18 +21,18 @@ class SendDailyNotificationsForActiveGames
       partitions = partition_users(game)
 
       partitions[:ninjas].each do |user|
-        puts "- sending ninjas notifications"
-        send_notification(user, message_name("ninjas", day_index))
+        puts '- sending ninjas notifications'
+        send_notification(user, message_name('ninjas', day_index))
       end
 
       partitions[:targets].each do |user|
-        puts "- sending targets notifications"
-        send_notification(user, message_name("targets", day_index))
+        puts '- sending targets notifications'
+        send_notification(user, message_name('targets', day_index))
       end
 
       partitions[:ninja_and_targets].each do |user|
-        puts "- sending ninjas and targets notifications"
-        send_notification(user, message_name("ninjas_and_targets", day_index))
+        puts '- sending ninjas and targets notifications'
+        send_notification(user, message_name('ninjas_and_targets', day_index))
       end
     end
   end

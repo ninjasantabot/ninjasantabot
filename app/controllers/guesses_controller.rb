@@ -2,7 +2,7 @@ class GuessesController < ApplicationController
   before_action :find_day
 
   def new
-    @guess = @day&.guesses.find_by(user: current_user)
+    @guess = @day.guesses.find_by(user: current_user)
   end
 
   def create
@@ -16,7 +16,7 @@ class GuessesController < ApplicationController
     ).call
 
     redirect_to @game
-  rescue => e
+  rescue
     redirect_to new_game_guess_path(@game)
   end
 

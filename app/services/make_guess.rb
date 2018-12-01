@@ -16,6 +16,7 @@ class MakeGuess
   end
 
   private
+
   attr_reader :day, :game, :target, :ninja
 
   def correct?
