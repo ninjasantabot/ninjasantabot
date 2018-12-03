@@ -10,7 +10,7 @@ class MakeGuess
     guess = Guess.new(day: day, user: target, ninja: ninja, correct: correct?)
 
     guess.transaction do
-      pairing.update!(guessed: true) if correct?
+      pairing.update!(guessed_at: Time.now) if correct?
       guess.save!
     end
   end
