@@ -11,7 +11,7 @@ class RunMiddayTasks
   private
 
   def send_clue_reminders
-    SendClueReminders.new(@bot).call
+    SendClueReminders.new(@bot, Game.waiting_for_clues).call
   end
 
   def start_games

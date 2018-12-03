@@ -10,6 +10,6 @@ class RunMorningTasks
   private
 
   def send_daily_notifications_for_active_games
-    SendDailyNotificationsForActiveGames.new(@bot).call
+    SendDailyNotificationsForActiveGames.new(@bot, Game.in_progress).call
   end
 end

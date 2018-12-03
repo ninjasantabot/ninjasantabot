@@ -7,13 +7,14 @@ class SendDailyNotificationsForActiveGames
     4 => 'day_five',
   }.freeze
 
-  def initialize(bot)
+  def initialize(bot, scope)
     @bot = bot
+    @scope = scope
   end
 
   def call
     puts 'in SendDailyNotificationsForActiveGames'
-    Game.in_progress.each do |game|
+    @scope.each do |game|
       puts "sending notifications for game #{game.id}"
       day_index = game.current_day.index
       next unless notification_for_day?(day_index)

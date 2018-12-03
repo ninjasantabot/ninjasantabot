@@ -1,11 +1,12 @@
 class SendClueReminders
-  def initialize(bot)
+  def initialize(bot, scope)
     @bot = bot
+    @scope = scope
   end
 
   def call
     puts 'in SendClueReminders'
-    game_groupings = Game.waiting_for_clues.group_by(&:days_until_start)
+    game_groupings = @scope.group_by(&:days_until_start)
     game_groupings.default = []
 
     game_groupings[3].each do |game|
