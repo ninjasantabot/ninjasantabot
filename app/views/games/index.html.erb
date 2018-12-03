@@ -9,6 +9,14 @@
   <% if @available_games.any? %>
     <% @available_games.each do |game| %>
       <div>
+        <p><strong>Terms and Conditions</strong>
+        <p>By opting in to play Ninja Santa, you are henceforth trusted to be a responsible player and not an asshat.
+        <p><em>What does not being an asshat mean?</em>
+        <p>You get your clues in on time. You give truthful clues. You don’t give clues that are too crazy hard throughout ninja week or so damn lazy you just give the game away on day one.
+        <p>You give a gift to your Target of ~$15. You have this gift ready to go from the commencement of the game. You don’t cheat.
+        <p>If you fail to give your clues on time, after enough prompting, you will be barred from this game of Ninja Santa, but will still owe your Target a present.
+        <p><strong>Congratulations, Ninja. Happy hunting.</strong>
+
         <%= link_to "Join #{game.name}", join_game_path(game), method: :post %>
       </div>
     <% end %>
