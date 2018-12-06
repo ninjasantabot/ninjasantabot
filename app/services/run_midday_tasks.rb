@@ -4,7 +4,7 @@ class RunMiddayTasks
 
     @bot = SantaBot.new
 
-    send_clue_reminders
+    # send_clue_reminders
     start_games
   end
 
