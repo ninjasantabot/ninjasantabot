@@ -20,6 +20,8 @@
   <p>You haven't received any clues yet!</p>
 <% end %>
 
+<p> Your target is <%= @game.pairing_for(current_user).target.name %></p>
+
 <% if @clues.queued.any? %>
   <p>Queued clues:</p>
   <ul>
