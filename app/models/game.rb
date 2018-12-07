@@ -38,7 +38,7 @@ class Game < ApplicationRecord
   end
 
   def pairing_for(ninja)
-    pairings.select { |p| p.ninja == ninja }.first
+    pairings.preload(:ninja).select { |p| p.ninja == ninja }.first
   end
 
   def in_progress?
