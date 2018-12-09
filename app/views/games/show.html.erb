@@ -2,64 +2,8 @@
 
 <%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to('Back to my games', games_path) %>
 
-<% if @clues.current %>
-  <p>Today's clue from your santa is:</p>
-  <p><%= @clues.current.value %></p>
-<% end %>
+<%= render 'incoming_clues' %>
 
-<% if @clues.previous.any? %>
-  <p>Previous clues from your santa:</p>
-  <ul>
-    <% @clues.previous.each do |clue| %>
-      <li><%= clue.value %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render 'outgoing_clues' %>
 
-<% if !@clues.current && @clues.previous.none? %>
-  <p>You haven't received any clues yet!</p>
-<% end %>
-
-<p> Your target is <%= @game.pairing_for(current_user).target.name %></p>
-
-<% if @clues.queued.any? %>
-  <p>Queued clues:</p>
-  <ul>
-    <% @clues.queued.each do |queued_clue| %>
-      <li>Clue: <%= queued_clue.value %> | Date: <%= queued_clue.day.date %> <%= link_to('Edit clue', edit_game_clue_path(@game, queued_clue)) %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% if @clues.sent.any? %>
-  <p>Sent clues:</p>
-  <ul>
-    <% @clues.sent.each do |sent_clue| %>
-      <li>Clue: <%= sent_clue.value %> | Date: <%= sent_clue.day.date %></li>
-    <% end %>
-  </ul>
-<% end %>
-
-<% if @game.pairing_for(current_user) %>
-  <% if not_all_days_have_clues?(@game, current_user) %>
-    <p><%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to('Create a new clue', new_game_clue_path(@game)) %></p>
-  <% end %>
-<% else %>
-  <p>You need to have a target before you can create clues</p>
-<% end %>
-
-<% if @guesses.any? %>
-
-  <p>Guesses you've made:</p>
-
-  <ul>
-    <% @guesses.each do |guess| %>
-      <li><%= guess.ninja.name %></li>
-    <% end %>
-  </ul>
-
-<% end %>
-
-<% if @game.accepting_guesses_for?(current_user) %>
-  <%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to "Make a guess", new_game_guess_path(@game) %>
-<% end %>
+<%= render 'guesses' %>

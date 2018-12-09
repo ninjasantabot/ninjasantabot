@@ -1,0 +1,14 @@
+<% if @guesses.any? %>
+  <p>Guesses you've made:</p>
+
+  <ul>
+    <% @guesses.each do |guess| %>
+      <li><%= guess.ninja.name %></li>
+    <% end %>
+  </ul>
+
+<% end %>
+
+<% if @game.accepting_guesses_for?(current_user) %>
+  <%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to "Make a guess", new_game_guess_path(@game) %>
+<% end %>

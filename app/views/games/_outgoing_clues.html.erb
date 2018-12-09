@@ -1,0 +1,27 @@
+<p> Your target is <%= @game.pairing_for(current_user).target.name %></p>
+
+<% if @clues.queued.any? %>
+  <p>Queued clues:</p>
+  <ul>
+    <% @clues.queued.each do |queued_clue| %>
+      <li>Clue: <%= queued_clue.value %> | Date: <%= queued_clue.day.date %> <%= link_to('Edit clue', edit_game_clue_path(@game, queued_clue)) %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @clues.sent.any? %>
+  <p>Sent clues:</p>
+  <ul>
+    <% @clues.sent.each do |sent_clue| %>
+      <li>Clue: <%= sent_clue.value %> | Date: <%= sent_clue.day.date %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @game.pairing_for(current_user) %>
+  <% if not_all_days_have_clues?(@game, current_user) %>
+    <p><%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to('Create a new clue', new_game_clue_path(@game)) %></p>
+  <% end %>
+<% else %>
+  <p>You need to have a target before you can create clues</p>
+<% end %>
