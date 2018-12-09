@@ -7,6 +7,8 @@ class MakeGuess
   end
 
   def call
+    raise unless game.guessable_ninjas(target).include?(ninja)
+
     guess = Guess.new(day: day, user: target, ninja: ninja, correct: correct?)
 
     guess.transaction do

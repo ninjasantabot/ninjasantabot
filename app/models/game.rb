@@ -50,6 +50,12 @@ class Game < ApplicationRecord
     game_start_date <= today && game_end_date > today
   end
 
+  def guessable_ninjas(target)
+    remaining = remaining_ninjas
+    guessed   = users.where(id: guesses.where(user: target).pluck(:ninja_id))
+    remaining - [target] - guessed
+  end
+
   private
 
   def current_day_index
