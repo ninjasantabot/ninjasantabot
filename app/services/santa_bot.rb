@@ -11,7 +11,7 @@ class SantaBot
       message_user(
         user: notification.user.uid,
         message: notification.key,
-        target: notification.target.name
+        target: notification.target&.name
       )
     end
   end
