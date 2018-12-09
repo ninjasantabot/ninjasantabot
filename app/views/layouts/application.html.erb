@@ -15,7 +15,9 @@
       <table border="3" width="100%" cellpadding="3">
         <tbody>
           <td><%= link_to('My games', games_path) %></td>
-          <td><%= link_to('Leaderboard', games_path) %></td>
+          <% if @game %>
+            <td><%= link_to('Leaderboard', game_leaderboard_path(@game)) %></td>
+          <% end %>
           <td><%= link_to('???', games_path) %></td>
         </tbody>
       </table>

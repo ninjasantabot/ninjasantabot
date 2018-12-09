@@ -1,0 +1,21 @@
+<h2><i><%= @game.name %></i> Leaderboard</h2>
+
+<%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to('Back to my games', games_path) %>
+
+<p><strong>Successful Targets</strong></p>
+<% if @successful.any? %>
+  <ol>
+    <% @successful.each do |pair| %>
+      <li><%= pair.target.name %> guessed <%= pair.ninja.name %> at <%= pair.guessed_at.in_time_zone('Pacific/Auckland') %></li>
+    <% end %>
+  </ol>
+<% else %>
+  <p>No one yet! 🙀</p>
+<% end %>
+
+<p><strong>Everyone Else</strong></p>
+<ul>
+  <% @pending.each do |pair| %>
+    <li><%= pair.target.name %></li>
+  <% end %>
+</ul>
