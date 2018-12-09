@@ -9,6 +9,6 @@
 
 <% end %>
 
-<% if @game.accepting_guesses_for?(current_user) && game.guess_entry_permissible? %>
+<% if @game.accepting_guesses_for?(current_user) && @game.guess_entry_permissible? %>
   <%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to "Make a guess", new_game_guess_path(@game) %>
 <% end %>

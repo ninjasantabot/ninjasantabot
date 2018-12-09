@@ -6,6 +6,6 @@ class Pairing < ApplicationRecord
   scope :active, -> { where(guessed_at: nil) }
 
   def active?
-    !!guessed_at
+    !guessed_at
   end
 end
