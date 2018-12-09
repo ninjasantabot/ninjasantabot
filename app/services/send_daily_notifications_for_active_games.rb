@@ -7,8 +7,7 @@ class SendDailyNotificationsForActiveGames
     4 => 'day_five',
   }.freeze
 
-  def initialize(bot, scope)
-    @bot = bot
+  def initialize(scope)
     @scope = scope
   end
 
@@ -40,8 +39,6 @@ class SendDailyNotificationsForActiveGames
 
   private
 
-  attr_reader :bot
-
   def partition_users(game)
     surviving_ninjas = game.pairings.active.map(&:ninja)
     pondering_targets = game.pairings.active.map(&:target)
@@ -54,7 +51,7 @@ class SendDailyNotificationsForActiveGames
   end
 
   def send_notification(user, message)
-    bot.message_user(user: user.uid, message: message)
+    game.notifications.create!(user: user, day: game.current_day, key: message)
   end
 
   def message_name(type, day_index)

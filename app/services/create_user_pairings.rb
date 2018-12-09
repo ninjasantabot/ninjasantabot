@@ -1,8 +1,7 @@
 class CreateUserPairings
-  def initialize(game, bot)
+  def initialize(game)
     @game = game
     @users = game.users
-    @bot = bot
   end
 
   def call
@@ -11,13 +10,12 @@ class CreateUserPairings
     Pairing.transaction do
       users.shuffle.cycle.each_cons(2).take(users.size).each do |ninja, target|
         game.pairings.create!(ninja: ninja, target: target)
-
-        bot.message_user(user: ninja.uid, target: target.name, message: 'ninja_mail.target_assignment')
+        game.notifications.create!(user: ninja, target: target, key: 'ninja_mail.target_assignment')
       end
     end
   end
 
   private
 
-  attr_reader :game, :users, :bot
+  attr_reader :game, :users
 end

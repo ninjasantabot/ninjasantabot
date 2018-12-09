@@ -1,6 +1,5 @@
 class SendClueReminders
-  def initialize(bot, scope)
-    @bot = bot
+  def initialize(scope)
     @scope = scope
   end
 
@@ -24,15 +23,13 @@ class SendClueReminders
 
   def send_reminder_to_all_users(game, message)
     puts "sending #{message} for game #{game.id}"
-    game.users.each do |ninja|
-      if game.clues.where(user: ninja).count < game.num_days
-        target = game.pairing_for(ninja).target
-        bot.message_user(user: ninja.uid, target: target.name, message: message)
+    game.with_lock do
+      game.users.each do |ninja|
+        if game.clues.where(user: ninja).count < game.num_days
+          target = game.pairing_for(ninja).target
+          game.notifications.create!(user: ninja, target: target, key: message)
+        end
       end
     end
   end
-
-  private
-
-  attr_reader :bot
 end
