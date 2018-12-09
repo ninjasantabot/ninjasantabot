@@ -14,11 +14,13 @@
       <%= link_to(image_tag("ninja-santa-header.png"), root_path, {class: 'header'}) %>
       <table border="3" width="100%" cellpadding="3">
         <tbody>
-          <td><%= link_to('My games', games_path) %></td>
-          <% if @game %>
-            <td><%= link_to('Leaderboard', game_leaderboard_path(@game)) %></td>
+        <td><%= link_to('My games', games_path) %></td>
+        <% if @game %>
+          <td><%= link_to('Leaderboard', game_leaderboard_path(@game)) %></td>
+          <% if current_user&.creator %>
+            <td><%= link_to('Oversight', game_oversight_path(@game)) %></td>
           <% end %>
-          <td><%= link_to('???', games_path) %></td>
+        <% end %>
         </tbody>
       </table>
 

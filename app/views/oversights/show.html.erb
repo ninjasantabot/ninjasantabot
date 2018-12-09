@@ -1,0 +1,12 @@
+<h2><em><%= @game.name %></em> Oversight</h2>
+
+<%= image_tag("arrow-animated.gif", height: '25', class: 'anchored') %> <%= link_to('Back to my games', games_path) %>
+
+<% @user_info_by_entries.each do |entries, user_data| %>
+  <p>With <%= entries %> entries</p>
+  <ul>
+    <% user_data.each do |datum| %>
+      <li><%= datum[:name] %> (<%= datum[:id] %>)</li>
+    <% end %>
+  </ul>
+<% end %>

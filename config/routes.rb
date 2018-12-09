@@ -15,6 +15,6 @@ Rails.application.routes.draw do
     resources :clues, only: %i(new create edit update)
     resources :guesses, only: %i(new create)
     resource  :leaderboard, only: %i(show)
+    resource  :oversight, only: %i(show)
   end
-
 end
