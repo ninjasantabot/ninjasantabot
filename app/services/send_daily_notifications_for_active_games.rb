@@ -22,17 +22,17 @@ class SendDailyNotificationsForActiveGames
 
       partitions[:ninjas].each do |user|
         puts '- sending ninjas notifications'
-        send_notification(user, message_name('ninjas', day_index))
+        send_notification(game, user, message_name('ninjas', day_index))
       end
 
       partitions[:targets].each do |user|
         puts '- sending targets notifications'
-        send_notification(user, message_name('targets', day_index))
+        send_notification(game, user, message_name('targets', day_index))
       end
 
       partitions[:ninja_and_targets].each do |user|
         puts '- sending ninjas and targets notifications'
-        send_notification(user, message_name('ninjas_and_targets', day_index))
+        send_notification(game, user, message_name('ninjas_and_targets', day_index))
       end
     end
   end
@@ -50,7 +50,7 @@ class SendDailyNotificationsForActiveGames
     }
   end
 
-  def send_notification(user, message)
+  def send_notification(game, user, message)
     game.notifications.create!(user: user, day: game.current_day, key: message)
   end
 
