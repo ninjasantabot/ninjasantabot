@@ -6,6 +6,8 @@ class GuessesController < ApplicationController
   end
 
   def create
+    raise unless @game.guess_entry_permissible?
+
     ninja = User.find(ninja_id)
 
     MakeGuess.new(

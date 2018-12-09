@@ -34,6 +34,10 @@ class Game < ApplicationRecord
     (game_start_date - WorkaroundTime.today).to_i
   end
 
+  def guess_entry_permissible?
+    WorkaroundTime.midday_of(current_day.date) <= WorkaroundTime.now
+  end
+
   def accepting_guesses_for?(user)
     in_progress? && pairing_targeting(user).active? && current_day.guesses.where(user: user).empty?
   end
