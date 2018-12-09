@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
       render file: "#{Rails.root}/public/403.html", status: :forbidden
     end
   end
+
+  def find_game
+    @game = Game.find(params[:game_id])
+  end
 end

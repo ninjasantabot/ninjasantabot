@@ -57,8 +57,4 @@ class CluesController < ApplicationController
     clued_days = @game.days.joins(:clues).where(clues: { user_id: user.id })
     (@game.days - clued_days).min_by(&:index)
   end
-
-  def find_game
-    @game = Game.find(params[:game_id])
-  end
 end
