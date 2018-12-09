@@ -2,6 +2,7 @@ class Game < ApplicationRecord
   has_many :user_games, dependent: :destroy
   has_many :pairings, dependent: :destroy
   has_many :days, dependent: :destroy
+  has_many :notifications, dependent: :destroy
 
   has_many :users, through: :user_games
   has_many :clues, through: :days

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_054739) do
+ActiveRecord::Schema.define(version: 2018_12_09_093408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,22 @@ ActiveRecord::Schema.define(version: 2018_12_03_054739) do
     t.index ["day_id"], name: "index_guesses_on_day_id"
     t.index ["ninja_id"], name: "index_guesses_on_ninja_id"
     t.index ["user_id"], name: "index_guesses_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "target_id"
+    t.bigint "day_id"
+    t.text "key", null: false
+    t.datetime "sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["day_id"], name: "index_notifications_on_day_id"
+    t.index ["game_id", "user_id", "day_id", "key"], name: "index_notifications_on_game_id_and_user_id_and_day_id_and_key", unique: true
+    t.index ["game_id"], name: "index_notifications_on_game_id"
+    t.index ["target_id"], name: "index_notifications_on_target_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "pairings", force: :cascade do |t|

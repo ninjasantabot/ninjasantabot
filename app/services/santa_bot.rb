@@ -3,6 +3,19 @@ class SantaBot
     @client = Slack::Web::Client.new
   end
 
+  def send_notification(notification)
+    notification.with_lock do
+      raise if notification.sent_at
+
+      notification.update!(sent_at: Time.now)
+      message_user(
+        user: notification.user.uid,
+        message: notification.key,
+        target: notification.target.name
+      )
+    end
+  end
+
   def message_user(user:, message:, target: nil)
     client.chat_postMessage(
       channel: user,

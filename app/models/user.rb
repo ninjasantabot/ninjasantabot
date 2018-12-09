@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :received_clues, foreign_key: 'target_id', inverse_of: :target, class_name: 'Clue'
 
   has_many :pairings
+  has_many :notifications
 
   validates_uniqueness_of :uid
 
