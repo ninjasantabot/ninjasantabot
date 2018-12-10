@@ -30,11 +30,11 @@ class CluesController < ApplicationController
   end
 
   def edit
-    @clue = Clue.find(params[:id])
+    @clue = current_user.clues.find(params[:id])
   end
 
   def update
-    @clue = Clue.find(params[:id])
+    @clue = current_user.clues.find(params[:id])
 
     if @clue.update(clue_params)
       redirect_to game_path(@game)
