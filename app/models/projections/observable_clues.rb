@@ -31,7 +31,7 @@ class ObservableClues
   end
 
   def clues_for(target)
-    clues.preload(:day).where(target: target).oldest_first
+    clues.preload(:day).where(target: target).recent_first
   end
 
   def clues_from(ninja)
