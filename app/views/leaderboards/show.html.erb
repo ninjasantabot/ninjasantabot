@@ -4,18 +4,35 @@
 
 <p><strong>Successful Targets</strong></p>
 <% if @successful.any? %>
-  <ol>
-    <% @successful.each do |pair| %>
-      <li><%= pair.target.name %> guessed <%= pair.ninja.name %> at <%= pair.guessed_at.in_time_zone('Pacific/Auckland') %></li>
-    <% end %>
-  </ol>
+  <table border="3" width="100%" cellpadding="3">
+    <thead>
+      <hr>
+        <th>Target</th>
+        <th>Ninja</th>
+        <th>When</th>
+      </hr>
+    </thead>
+    <tbody>
+      <% @successful.each do |pair| %>
+        <tr>
+          <td><%= pair.target.name %></td>
+          <td><%= pair.ninja.name %></td>
+          <td><%= pair.guessed_at.in_time_zone('Pacific/Auckland').strftime('%A %H:%M:%S') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
   <p>No one yet! 🙀</p>
 <% end %>
 
 <p><strong>Everyone Else</strong></p>
-<ul>
-  <% @pending.each do |pair| %>
-    <li><%= pair.target.name %></li>
+<table border="3" width="100%" cellpadding="3">
+  <% @pending.in_groups_of(3).each do |pairs| %>
+    <tr>
+      <% pairs.each do |pair| %>
+        <td><%= pair&.target&.name %></td>
+      <% end %>
+    </tr>
   <% end %>
-</ul>
+</table>
